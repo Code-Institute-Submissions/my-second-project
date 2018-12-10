@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <title>Celtic tours</title>
+</head>
+<body>
+    <header>
+       <nav>
+      
+             <div class = "navbar">
+                 <span id="company-name">Celtic Tours</span>
+                 <ul class="nav-list">
+                     <li class="nav-list-item"><a href="" class="hvr-bounce-in">About</a></li>
+                     <li class="nav-list-item"><a href="" class="hvr-bounce-in">Contact</a></li>
+                 </ul>
+             </div>
+        
+       </nav>
+     </header>
+     <section class="bg-color">
+         <div class="container">
+             <div class="form">
+                 
+                 <form id="map_form">
+                     <br><br>
+                     <label class="map-input-labels">Select Country:</label>
+                     <select name="country">
+                      <option value="ireland">Ireland</option>
+                      <option value="england">England</option>
+                      <option value="wales">Wales</option>
+                      <option value="scotland">Scotland</option>
+                    </select><br><br>
+                    <label class="map-input-labels">City:</label><input type="text" name="city" class="form-control" id="city" placeholder="city" size ="25" required/><br><br><br>
+                    <label class="map-input-labels">Choose one of the following options</label><br>
+                      <input type="radio" name="tourist" value="bars"checked>Bars<br>
+                      <input type="radio" name="tourist" value="resturants"checked>Resturants<br>
+                      <input type="radio" name="tourist" value="Hotels">Hotels<br>
+                      <input type="radio" name="tourist" value="Tourist Attractions">Tourist Attractions<br>
+                      <button type="submit" onclick="codeAddress()">Submit Details</button> 
+                    <!--  <a href='https://www.freepik.com/free-vector/travel-concept-background_778756.htm'>Designed by Freepik</a> -->
+                 </form>
+             </div>
+            
+             <div id="map"></div>
+         </div> 
+     </section>
+     <footer>
+        
+     </footer>
+    
+    
+ 
+    <script type="text/javascript" src="js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDEYP29-QlSQsWK6fF2uyjWUizfVjISl0&callback=initMap" async defer></script>
+    
+</body>
+</html>
