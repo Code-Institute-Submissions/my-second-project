@@ -37,7 +37,7 @@
                       <option value="wales">Wales</option>
                       <option value="scotland">Scotland</option>
                     </select><br><br>
-                    <label class="map-input-labels">City:</label><input type="text" name="city" class="form-control" id="city" placeholder="city" size ="25" required/><br><br><br>
+                    <label class="map-input-labels">City:</label><input type="text" name="address" class="form-control" id="address" placeholder="city" size ="25" required/><br><br><br>
                     <label class="map-input-labels">Choose one of the following options</label><br>
                       <input type="radio" name="tourist" value="bars"checked>Bars<br>
                       <input type="radio" name="tourist" value="resturants"checked>Resturants<br>
@@ -54,36 +54,41 @@
      <footer>
         
      </footer>
-    <script>
-        function initMap() {
-                alert("hello1")
-                geocoder = new google.maps.Geocoder();
-                map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 53.142, lng: 7.6921 },
-                zoom: 4
-                });
-            }
-               
-        
-        function codeAddress() {
-            alert("helloo2");
-            var address = document.getElementById('city').value;
-            geocoder.geocode( { 'address': address}, function(results, status) {
-                if (status === 'OK') {
-                 //   alert(results[0].geometry.location)
-                    map.panTo(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                        });
-                
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                     } 
-            }); 
-        }
-    </script>
     
+    <script>
+        
+        function initMap() {
+            alert("hello");
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            alert("hello2");
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+              alert(results[0].geometry.location)
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+ 
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDEYP29-QlSQsWK6fF2uyjWUizfVjISl0&callback=initMap" async defer></script>
     
 </body>
