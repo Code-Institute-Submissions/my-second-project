@@ -9,206 +9,111 @@
     
 
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Roboto" rel="stylesheet">
     
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->
-     
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                emailjs.init("user_oJL9HICmaa6PQKM1BAynd");
+            })();
+        </script>
     <title>Celtic tours</title>
 </head>
 
 <body>
     <header>
        <nav>
-             <div class = "navbar">
+             <div id = "navbar">
                  <span id="company-name">Celtic Tours</span>
                  <ul class="nav-list">
-                     <li class="nav-list-item"><a href="" class="hvr-bounce-in">About</a></li>
-                     <li class="nav-list-item"><a href="" class="hvr-bounce-in">Contact</a></li>
+                     <li class="nav-list-item"><a href="#about" class="hvr-bounce-in">About</a></li>
+                     <li class="nav-list-item"><a href="#myform" class="hvr-bounce-in">Contact</a></li>
                  </ul>
              </div>
        </nav>
      </header>
      <section class="bg-color">
-         <div class="container-fluid">
+         <div id="main">
              <div class="form">
-                 
                  <form id="map_form">  
-                     <br><br>
+                     <div class ="form_style">
                      <label class="ap-input-labels">Select Country:</label>
                      <select id="country" name="country" onchange="moveCenterToCapital()">
                       <option value="ireland">Ireland</option>
+                      <option value="nireland">Northern Ireland</option>
                       <option value="england">England</option>
                       <option value="wales">Wales</option>
                       <option value="scotland">Scotland</option>
                     </select><br><br>
-                    <label class="map-input-labels">City:</label>
-                    <input type="text" id="autocomplete" name="city" placeholder="city" size ="25"><br><br><br>  
-                    
+                    </div>
+                    <div class ="form_style">
                     <label class="map-input-labels">Choose one of the following options</label><br>
-                      <input type="radio" name="tourist" value="bar"checked>Bars<br>
-                      <input type="radio" name="tourist" value="restaurant">Restaurants<br>
-                      <input type="radio" name="tourist" value="hotel">Hotels<br>
-                      <input type="radio" name="tourist" value="museum">Tourist Attractions<br>
-                      
+                      <input type="radio" name="tourist" value="bar"checked><span>Bars</span><br>
+                      <input type="radio" name="tourist" value="restaurant"><span>Restaurants</span><br>
+                      <input type="radio" name="tourist" value="hotel"><span>Hotels<span><br>
+                      <input type="radio" name="tourist" value="museum"><span>Tourist Attractions<span><br><br><br>
+                      </div>
+                      <div class ="form_style">
                     <!--  <a href='https://www.freepik.com/free-vector/travel-concept-background_778756.htm'>Designed by Freepik</a> -->
-                   
-                 <button type="button" onclick="codeAddress()">Submit Details</button> 
+                     <label class="map-input-labels">City:</label>
+                     <input type="text" id="autocomplete" name="city" placeholder="city" size ="20"><br><br><br>
+                     </div>
+                     <button type="button" onclick="codeAddress()">Submit Details</button> 
                  </form>
              </div>
-             <div id="map"></div>
+                 <div id="map"></div>
          </div> 
      </section>
-    <script>
-        var mycountry;
-        var map;
-        var infowindow;
-        var geocoder;
-        var service;
-        var markers =[];
-        var request;
-        
-        
-        
-        function initMap() {
-                geocoder = new google.maps.Geocoder();
-                var center = new google.maps.LatLng(54.2361, -4.5481)
-                map = new google.maps.Map(document.getElementById('map'), {
-                center: center,
-                zoom: 6
-                });
-                
-                autocomplete();
-            
-         }
-         
-         function autocomplete() {
-             var addressOne = document.getElementById("autocomplete").value;
-             var autocomplete = new google.maps.places.Autocomplete(addressOne[0]);
-             
-             google.maps.event.addListener(autocomplete, 'place_changed', function(){
-                var place = autocomplete.getPlace();
-             });
-         }
-         
-         function codeAddress() {
-             clearResults(markers);
-             var countryISO;
-             var address = document.getElementById("autocomplete").value;
-             var locType = document.querySelector('input[name="tourist"]:checked').value; ;
-             mycountry = document.getElementById("country").value;
-             if(mycountry == "ireland") {
-                 countryISO = "IE" ;
-             } else {
-                 countryISO ="GB" ;
-             }
-             
-             
-            
-              geocoder.geocode( {'address': address, componentRestrictions: {country: countryISO} }, function(results, status) {
-              if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                map.setZoom(15);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    title: "center"
-                });
-                var pos = results[0].geometry.location;
-                request = {
-                     location: (pos),
-                     radius:1000,
-                     types: [locType]
-                     };
-                service = new google.maps.places.PlacesService(map);
-                service.nearbySearch(request, callback);
-                infowindow = new google.maps.InfoWindow();
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
-              
-              
-            });
-            
-         }
-         
-          function clearResults (markers){
-              for (i= 0; i < markers.length; i++){
-                  markers[i].setMap(null);
-              }
-              markers = [];
-              alert("tets");
-          }
-          function callback(results, status) {
-             if(status == google.maps.places.PlacesServiceStatus.OK){
-                 for(var i =0; i < results.length; i++){
-                     markers.push(createMarker(results[i]));
-                 }
-             } else {
-                  alert("test4");
-             }
-             
-         }
-         
-         function createMarker(place) {
-             var placeLoc = place.geometry.location;
-             var locType = document.querySelector('input[name="tourist"]:checked').value; 
-             var iconType ;
-             if (locType =="bar"){
-                  iconType="bar.png"
-                  
-             } else if (locType=="restaurant"){
-                 iconType ="restaurant.png";
-                 
-             } else if (locType=="hotel"){
-                 iconType="lodging.png";
-                 
-             }else if (locType=="museum"){
-                 iconType="info.png";
-                 
-             }
-             
-             
-                 var marker = new google.maps.Marker({
-                 map: map,
-                 position: place.geometry.location,
-                 icon: {url : "http://maps.google.com/mapfiles/ms/icons/"+iconType},
-                 animation: google.maps.Animation.DROP
-             });
-             google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place ID: ' + place.place_id + '<br>' +
-                place.formatted_address + '</div>');
-                infowindow.open(map, this);
-             });
-             
-             return marker;
-         }
-         
-        function moveCenterToCapital() {
-            mycountry = document.getElementById("country").value;
-            if(mycountry === "ireland"){
-                map.setCenter({lat: 53.4230832, lng: -7.942705});
-                map.setZoom(7);
-            } else if (mycountry === "wales") {
-                map.setCenter({lat: 52.2928116, lng: -3.73893});
-                map.setZoom(7);
-            } else if (mycountry === "england") {
-                map.setCenter({lat: 52.7954791, lng: -0.5402402866174321});
-                map.setZoom(7);
-            } else if (mycountry === "scotland") {
-                map.setCenter({lat: 56.7861112, lng: -4.1140518});
-                map.setZoom(7);
-            } else {
-                map.setCenter({lat: 53, lng: 7})
-                map.setZoom(7);
-            }
-        }
-      
-    </script>
      
-     <script type ="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3JNiQUROzzRABIR6jriQg4WzAdSuUTFI&libraries=places&callback=initMap" async defer></script>
+     <section>
+         <div id="about">
+             <h1>About Celtic Tours</h1>
+             <p>This web site was created to allow you to search any city within the British Isles(inculding Ireland) for hotels, resturants, bars and site seeing 
+             opportunities at that Location. Weather you would like to plan a route along the alantic way in Ireland, or through the valley's of Wales or a weekend  shopping trip to
+             London, this site can provide guidance on which hotels you would like to stay at, the best pub and resturants in the area as well as key site seeing opportunties. To use this
+             site just follow the four simmple steps.</p>
+             <ol>
+                 <li>Firstly choose a country from the dropdown list. The map will then zoom directly over your desired country.</li>
+                 <li>Secondly choose one the type of venues you are looking for ie. Hotel, Bars, Resturants or site seeing opportunites  </li>
+                 <li>Thirdly in the input box enter your destination. Note : If you orginally select Ireland from the drop down menu them you will only see cities in the the Republic of 
+                 Ireland. If you choose one of the other countries then you will only be able to select cities that are part of the UK.(the Uk was the lowest level of granularity)</li>
+                 <li>Finally hit the submit button!</li>
+             </ol>
+             <p>The results will be the map will zoom closer over your choosen destination and a plain icon on the center and depending on the option you choose, a number of
+             different  icones will display</p>
+            <p>For booking on any of the venues you can privde details on the form below and we will get back you within 24 hours.</p>
+       </div>
+    </section>  
+    
+    
+    
+     <section>
+         <div id="myform">
+           <div class ="bg-color-contact">
+                   <a href="#navbar" class="hvr-bounce-in top">Back to Top of Page</a>
+                   <h1 class ="contact-heading">Contact Form</h1>
+                   
+               
+                   <div class="center-form">
+                       <form name="contactform" onsubmit="return sendMail(this);" method="POST">
+                           <input type="text" name="name" id="fullname" placeholder="Name" required/><br>
+                           <input type="text" name="emailaddress" id="emailaddress" placeholder="E-mail" required/><br>
+                           <textarea rows="5" name="projectsummary" id="projectsummary" placeholder="Details" required></textarea><br>
+                           <button type="submit" class="center-block">Booking Details Submit</button>
+                       </form>
+                   </div>
+           </div>
+         </div>  
+       </section>
+       <section>
+           <footer>
+               <div class ="copyright">COPYRIGHT ©JOHN MELLALEY. ALL RIGHTS RESERVED</div>
+           </footer>
+       </section>
+
+    <script type ="text/javascript" src="assets/js/map.js"></script>
+    <script src="assets/js/sendemail.js"></script>
+    <script type ="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3JNiQUROzzRABIR6jriQg4WzAdSuUTFI&libraries=places&callback=initMap" async defer></script>
+    
 </body>
 </html>
