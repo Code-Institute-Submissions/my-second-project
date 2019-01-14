@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
-    <!-- Latest compiled and minified CSS -->
     
-
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <!-- Used for hover effects on links  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
+     <!-- Added the Roboto font  -->
     <link href="https://fonts.googleapis.com/icon?family=Roboto" rel="stylesheet">
     
-    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-        <script type="text/javascript">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    
+    <!-- Used so I can collected e-mails once the th contact form has been submitted  -->
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+        <script>
             (function() {
                 emailjs.init("user_oJL9HICmaa6PQKM1BAynd");
             })();
@@ -48,13 +50,12 @@
                     </div>
                     <div class ="form_style">
                     <label class="map-input-labels">Choose one of the following options</label><br>
-                      <input type="radio" name="tourist" value="bar"checked><span>Bars</span><br>
+                      <input type="radio" name="tourist" value="bar" checked><span>Bars</span><br>
                       <input type="radio" name="tourist" value="restaurant"><span>Restaurants</span><br>
-                      <input type="radio" name="tourist" value="hotel"><span>Hotels<span><br>
-                      <input type="radio" name="tourist" value="museum"><span>Tourist Attractions<span><br><br><br>
+                      <input type="radio" name="tourist" value="hotel"><span>Hotels</span><br>
+                      <input type="radio" name="tourist" value="museum"><span>Tourist Attractions</span><br><br><br>
                       </div>
                       <div class ="form_style">
-                    <!--  <a href='https://www.freepik.com/free-vector/travel-concept-background_778756.htm'>Designed by Freepik</a> -->
                      <label class="map-input-labels">City:</label>
                      <input type="text" id="autocomplete" name="city" placeholder="city" size ="20"><br><br><br>
                      </div>
@@ -68,20 +69,22 @@
      <section>
          <div id="about">
              <h1>About Celtic Tours</h1>
-             <p>This web site was created to allow you to search any city within the British Isles(inculding Ireland) for hotels, resturants, bars and site seeing 
-             opportunities at that Location. Weather you would like to plan a route along the alantic way in Ireland, or through the valley's of Wales or a weekend  shopping trip to
-             London, this site can provide guidance on which hotels you would like to stay at, the best pub and resturants in the area as well as key site seeing opportunties. To use this
-             site just follow the four simmple steps.</p>
+             <p>This web site was created to allow you to search any city within the British Isles (including Ireland) for hotels, restaurants, bars and site seeing 
+             opportunities at that Location. Weather you would like to plan a route along the Atlantic way in Ireland, or through the valleys of Wales or a weekend shopping trip to
+             London, this site can provide guidance on which hotels you would like to stay at, the best pub and restaurants in the area as well as key site seeing opportunities. To use this
+             site just follow the four simple steps</p>
              <ol>
                  <li>Firstly choose a country from the dropdown list. The map will then zoom directly over your desired country.</li>
-                 <li>Secondly choose one the type of venues you are looking for ie. Hotel, Bars, Resturants or site seeing opportunites  </li>
-                 <li>Thirdly in the input box enter your destination. Note : If you orginally select Ireland from the drop down menu them you will only see cities in the the Republic of 
-                 Ireland. If you choose one of the other countries then you will only be able to select cities that are part of the UK.(the Uk was the lowest level of granularity)</li>
+                 <li>Secondly choose one the type of venues you are looking for i.e. Hotel, Bars, Restaurants or site seeing opportunities  </li>
+                 <li>Thirdly in the input box enter your destination. Note: If you originally select Ireland from the drop-down menu them you will only see cities in the Republic of Ireland. 
+                  If you choose one of the other countries, then you will only be able to select cities that are part of the UK. (the UK was the lowest level of granularity). </li>
                  <li>Finally hit the submit button!</li>
              </ol>
-             <p>The results will be the map will zoom closer over your choosen destination and a plain icon on the center and depending on the option you choose, a number of
-             different  icones will display</p>
-            <p>For booking on any of the venues you can privde details on the form below and we will get back you within 24 hours.</p>
+             <p>The results will be the map will zoom closer over your chosen destination and a plain icon on the centre and depending on the option you choose, a number of
+             different icons will display. To get more information on this venue click on the icon and a pop-up window will appear with the following 
+             information Icon (indicator to type of venue. may be different than type chosen as can be more than one type for example and Hotel, may also have a bar and restaurant)
+             , Name, Address, Website link and phone number. If you click on the website link the sites website will open in a separate tab.</p>
+            <p>For booking on any of the venues you can providevde details on the form below and we will get back you within 24 hours.</p>
        </div>
     </section>  
     
@@ -110,10 +113,11 @@
                <div class ="copyright">COPYRIGHT ©JOHN MELLALEY. ALL RIGHTS RESERVED</div>
            </footer>
        </section>
-
-    <script type ="text/javascript" src="assets/js/map.js"></script>
+ 
+    <script src="assets/js/map.js"></script>
     <script src="assets/js/sendemail.js"></script>
-    <script type ="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3JNiQUROzzRABIR6jriQg4WzAdSuUTFI&libraries=places&callback=initMap" async defer></script>
+    <!-- Give access the Google maps API and then loads up the Map  -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3JNiQUROzzRABIR6jriQg4WzAdSuUTFI&libraries=places&callback=initMap" async defer></script>
     
 </body>
 </html>
