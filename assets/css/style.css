@@ -164,7 +164,7 @@ button:hover {
     border-color: black;
     clear: both;
     display: block;
-    font-family: "sans-serif",Roboto;
+    font-family: "sans-serif", Pacifico;
     font-style: oblique;
     font-size: large;
     width:100%;
@@ -172,7 +172,7 @@ button:hover {
 
 .contact-heading{
     display: block;
-    font-family: "sans-serif",Roboto;
+    font-family: "sans-serif", Pacifico;
     font-weight: 900;
     margin-top: 25px;
     margin-bottom: 20px;
