@@ -1,41 +1,41 @@
 // Global variables
-var mycountry,
-    map,
-    infowindow,
-    geocoder,
-    service,
-    markers = [],
-    request,
-    myAddress,
-    iso;
+var mycountry;
+var map;
+var infowindow;
+var geocoder;
+var service;
+var markers = [];
+var request;
+var iso;
 
 
-// Initial Map set up
+// Initial Map set up. Called from google maps api key
 function initMap() {
     geocoder = new google.maps.Geocoder();
-    var center = new google.maps.LatLng(54.2361, -4.5481)
+    var center = new google.maps.LatLng(54.2361, -4.5481);
     map = new google.maps.Map(document.getElementById('map'), {
         center: center,
         zoom: 6
     });
-    iso = "IE"; //default country code
+    iso = 'IE'; //default country code
     autocomplete(); //call autocomplete to add suggesting in search inbox
 
 }
 // used in search input box to predict location based on initial letters typed and country
 function autocomplete() {
     var input = document.getElementById('autocomplete');
-    var autocomplete = new google.maps.places.Autocomplete(input, { types: ['(cities)'] }); // uses Places library in the Maps JavaScript API. 
-    autocomplete.setComponentRestrictions({ 'country': [iso] }); //default iso country Ireland, can be changed to the GB if one of there other four countries is selected from the drop down box
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
-    })
+    // uses Places library in the Maps JavaScript API. 
+    var autocomplete = new google.maps.places.Autocomplete(input, { types: ['(cities)'] });
+    //default iso country Ireland, can be changed to the GB if one of there other four countries is selected from the drop down box
+    autocomplete.setComponentRestrictions({ 'country': [iso] }); 
+    google.maps.event.addListener(autocomplete, "place_changed", function() {
+    autocomplete.getPlace();
+    });
 }
 
 function codeAddress() {
     clearResults(markers);
-    var countryISO;
-    var address = document.getElementById("autocomplete").value;
+    var address = document.getElementById('autocomplete').value;
     var locType = document.querySelector('input[name="tourist"]:checked').value;
     var iso = ISOcounty();
     geocoder.geocode({ 'address': address, componentRestrictions: { country: iso } }, function(results, status) {
@@ -51,7 +51,7 @@ function codeAddress() {
             request = {       //area and type to be search around the centre
                 location: (pos),
                 radius: 1000,
-                types: [locType]
+                types: [locType, 'establishment']
             };
             service = new google.maps.places.PlacesService(map); //contructor
             service.nearbySearch(request, callback);  //retrieves places around the location
@@ -68,11 +68,11 @@ function codeAddress() {
 function ISOcounty() {
     var countryISO;
     var mycountry = document.getElementById("country").value;
-    if (mycountry == "ireland") {
-        countryISO = "IE";
+    if (mycountry == 'ireland') {
+        countryISO = 'IE';
     }
     else {
-        countryISO = "GB";
+        countryISO = 'GB';
     }
     return countryISO;
 }
@@ -80,7 +80,7 @@ function ISOcounty() {
 
 // clears marker from previous search
 function clearResults(markers) {
-    for (i = 0; i < markers.length; i++) {
+    for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
     markers = [];
@@ -102,24 +102,24 @@ function callback(results, status) {
 
 // add marker one at a time. called by function above
 function createMarker(place) {
-    var placeLoc = place.geometry.location;
+    place.geometry.location;
 
     var locType = document.querySelector('input[name="tourist"]:checked').value;
     var iconType;
-    if (locType == "bar") {
-        iconType = "bar.png"
+    if (locType == 'bar') {
+        iconType = 'bar.png';
 
     }
-    else if (locType == "restaurant") {
-        iconType = "restaurant.png";
+    else if (locType == 'restaurant') {
+        iconType = 'restaurant.png';
 
     }
-    else if (locType == "hotel") {
-        iconType = "lodging.png";
+    else if (locType == 'lodging') {
+        iconType = 'lodging.png';
 
     }
-    else if (locType == "museum") {
-        iconType = "info.png";
+    else if (locType == 'museum') {
+        iconType = 'info.png';
 
     }
 
@@ -127,20 +127,36 @@ function createMarker(place) {
     var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
-        icon: { url: "http://maps.google.com/mapfiles/ms/icons/" + iconType }, //selecting marker type
+        icon: { url: 'http://maps.google.com/mapfiles/ms/icons/' + iconType }, //selecting marker type
         animation: google.maps.Animation.DROP
     });
     
       var placeID = place.place_id; //new
+      
      // When icon clicked gathers information for the infor window i.e. icon, name, address, website and phone number
      google.maps.event.addListener(marker, 'click', function() {
        var service = new google.maps.places.PlacesService(map);
        service.getDetails({placeId: placeID}, function(place, status){
            if (status == 'OK') {
+               // changing undefined results to N/A.
+                var phone = place.international_phone_number;
+                var rating = place.rating;
+                var website = place.website;
+                var websiteText = 'Click for Venues Website';
+                if (phone ==undefined) {
+                    phone = 'N/A';
+                }
+                if (rating ==undefined) {
+                    rating = 'N/A';
+                }
+                if (website ==undefined) {
+                    website = 'N/A';
+                    websiteText ='No Website available'; //In case there is no web site
+                }
                 // creates popup box on marker when clicked
                  infowindow.setContent('<div><img src='+ place.icon +' width=' +20+ ' height='+20+'><strong>' +  place.name + '</strong><br>' + place.formatted_address +
-                '<br><a target="_blank" href=' + place.website + '>Click for Venues Website </a><br>Phone: ' + place.international_phone_number + 
-                '<br>  Rating out of 5: ' + place.rating +'</div>');
+                '<br><a target="_blank" href=' + website + '>'+ websiteText + '</a><br>Phone: ' + phone + 
+                '<br>  Rating out of 5: ' + rating +'</div>');
              }
              else {
                 alert('places was not successful for the following reason: ' + status);
@@ -157,30 +173,36 @@ function createMarker(place) {
 //Based on choice on dropdown(country), pan map to that specific location
 function moveCenterToCapital() {
     mycountry = document.getElementById("country").value;
-    if (mycountry === "ireland") {
+    if (mycountry === 'ireland') {
         map.setCenter({ lat: 53.4230832, lng: -7.942705 });
         map.setZoom(7);
     }
-    else if (mycountry === "wales") {
+    else if (mycountry === 'wales') {
         map.setCenter({ lat: 52.2928116, lng: -3.73893 });
         map.setZoom(7);
     }
-    else if (mycountry === "england") {
+    else if (mycountry === 'england') {
         map.setCenter({ lat: 52.7954791, lng: -0.5402402866174321 });
         map.setZoom(7);
     }
-    else if (mycountry === "scotland") {
+    else if (mycountry === 'scotland') {
         map.setCenter({ lat: 56.7861112, lng: -4.1140518 });
         map.setZoom(7);
     }
-    else if (mycountry === "nireland") {
+    else if (mycountry === 'nireland') {
         map.setCenter({ lat: 54.5947991, lng: -6.0667142 });
         map.setZoom(7);
     }
     else {
-        map.setCenter({ lat: 53, lng: 7 })
+        map.setCenter({ lat: 53, lng: 7 });
         map.setZoom(7);
     }
     iso = ISOcounty(); //set country based on choice
+    //resets inputbox
+    document.getElementById("autocomplete").value = "";
+    document.getElementById('autocomplete').placeholder ="city";
+    
     autocomplete(); // calls autcomplete as to limit it to the country selected.
+    
 }
+

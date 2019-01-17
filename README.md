@@ -1,7 +1,7 @@
 # Celtic Tours code institute Google Maps API
 ## Overview
 
-This web site was set up for the fictional company Celtic tours. Its purpose was to allow anyone planning a holiday in the British Isles, to search for a city
+This web site was set up for the fictional company Celtic tours. Its purpose was to allow anyone planning a holiday in the British Isles and Ireland, to search for a city
 in one of the 5 countries Ireland, Northern Ireland, Scotland, England or Wales. I have Autocomplete functionality in use so that when the user start typing
 a city on the input box, they will get suggesting of different cities associated with that country. By selecting one of the search types i.e. Hotel, Restaurant, bar or site seeing
 activities and pressing submit the google map would pan to the location and highlight several of the selected type within that area e.g. hotels with an
@@ -57,8 +57,8 @@ assets\wire frames folder within the project.
     
 * Icons
     -There is a different icon used for each of the 4 different types of search regarding Hotels, Bars, Restaurants, 
-     places of interest and one for showing the centre of the city. Once an icon is clicked it will provide a popup box with more information about the venu will
-     show up.
+     places of interest and one for showing the centre of the city. Once an icon is clicked it will provide a popup box with more information about the venue will
+     show up. They will also be a website link to the venues own website. click on this and the webpage will open on a new tab.
 
 * Contact form
     -form to allow users to submit queries or request booking through the company for any of the venue on display.
@@ -115,6 +115,9 @@ assets\wire frames folder within the project.
   - Mozilla Firefox    
   - Opera
 
+### Automatic testing
+- I tested two functions **moveCenterToCapital()** and **SetCountrySelected()** out of eight because there was significant logic in the two functions I choose.
+- If had more time would have like to tested the API calls.
 
 ### Site has been tested on mobile, tablet and laptop devices as well as testing on chrome for the different sizes.
 
@@ -140,4 +143,4 @@ https://johnmellaley.github.io/my-second-project/
 ## Photos       
 ### Image background on search form   
 - travel.png was obtained from www.freepik.com
-
+- plane.png was obtained from www.flaticon.com 

@@ -8,7 +8,7 @@
     <!-- Used for hover effects on links  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
      <!-- Added the Roboto font  -->
-    <link href="https://fonts.googleapis.com/icon?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Pacifico" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
     
@@ -25,13 +25,14 @@
 <body>
     <header>
        <nav>
-             <div id = "navbar">
-                 <span id="company-name">Celtic Tours</span>
-                 <ul class="nav-list">
-                     <li class="nav-list-item"><a href="#about" class="hvr-bounce-in">About</a></li>
-                     <li class="nav-list-item"><a href="#myform" class="hvr-bounce-in">Contact</a></li>
-                 </ul>
-             </div>
+           <div id = "navbar">
+               <ul class="nav-list">
+                   <li class="logo"></li>
+                   <li class="company-name">Celtic Tours</li>
+                   <li class="nav-list-item"><a href="#about" class="hvr-bounce-in">About</a></li>
+                   <li class="nav-list-item"><a href="#myform" class="hvr-bounce-in">Contact</a></li>
+               </ul>
+           </div>
        </nav>
      </header>
      <section class="bg-color">
@@ -52,14 +53,16 @@
                     <label class="map-input-labels">Choose one of the following options</label><br>
                       <input type="radio" name="tourist" value="bar" checked><span>Bars</span><br>
                       <input type="radio" name="tourist" value="restaurant"><span>Restaurants</span><br>
-                      <input type="radio" name="tourist" value="hotel"><span>Hotels</span><br>
+                      <input type="radio" name="tourist" value="lodging"><span>Hotels</span><br>
                       <input type="radio" name="tourist" value="museum"><span>Tourist Attractions</span><br><br><br>
                       </div>
                       <div class ="form_style">
                      <label class="map-input-labels">City:</label>
-                     <input type="text" id="autocomplete" name="city" placeholder="city" size ="20"><br><br><br>
+                     <input type="text" id="autocomplete" name="autocomplete" placeholder="city" size ="20"><br><br><br>
                      </div>
+                     <div class ="button_style">
                      <button type="button" onclick="codeAddress()">Submit Details</button> 
+                     </div>
                  </form>
              </div>
                  <div id="map"></div>
@@ -69,7 +72,7 @@
      <section>
          <div id="about">
              <h1>About Celtic Tours</h1>
-             <p>This web site was created to allow you to search any city within the British Isles (including Ireland) for hotels, restaurants, bars and site seeing 
+             <p>This web site was created to allow you to search any city within the British Isles and Ireland for hotels, restaurants, bars and site seeing 
              opportunities at that Location. Weather you would like to plan a route along the Atlantic way in Ireland, or through the valleys of Wales or a weekend shopping trip to
              London, this site can provide guidance on which hotels you would like to stay at, the best pub and restaurants in the area as well as key site seeing opportunities. To use this
              site just follow the four simple steps</p>
@@ -83,7 +86,7 @@
              <p>The results will be the map will zoom closer over your chosen destination and a plain icon on the centre and depending on the option you choose, a number of
              different icons will display. To get more information on this venue click on the icon and a pop-up window will appear with the following 
              information Icon (indicator to type of venue. may be different than type chosen as can be more than one type for example and Hotel, may also have a bar and restaurant)
-             , Name, Address, Website link and phone number. If you click on the website link the sites website will open in a separate tab.</p>
+             , Name, Address, Website link, phone number and Rating out of 5.. If you click on the website link the sites website will open in a separate tab.</p>
             <p>For booking on any of the venues you can providevde details on the form below and we will get back you within 24 hours.</p>
        </div>
     </section>  
@@ -95,8 +98,6 @@
            <div class ="bg-color-contact">
                    <a href="#navbar" class="hvr-bounce-in top">Back to Top of Page</a>
                    <h1 class ="contact-heading">Contact Form</h1>
-                   
-               
                    <div class="center-form">
                        <form name="contactform" onsubmit="return sendMail(this);" method="POST">
                            <input type="text" name="name" id="fullname" placeholder="Name" required/><br>
@@ -110,7 +111,9 @@
        </section>
        <section>
            <footer>
+               
                <div class ="copyright">COPYRIGHT ©JOHN MELLALEY. ALL RIGHTS RESERVED</div>
+               <div>Icons made by <a href="https://www.flaticon.com/authors/anatoly" title="Anatoly">Anatoly</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
            </footer>
        </section>
  
